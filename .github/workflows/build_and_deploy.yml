@@ -1,0 +1,26 @@
+name: Build and deploy for Woori Node App developers
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Clean up old Docker containers and images
+        run: |
+          docker rm woori-node-app -f || true
+          docker rmi woori-node-app || true
+
+      - name: Build Docker Image
+        run: |
+          docker build -t woori-node-app .
+
+      - name: Run Docker Container
+        run: |
+          docker run -d --name woori-node-app -p 443:3000 -v /etc/letsencrypt/live/nextui.woorifisa.store/fullchain.pem:/etc/nginx/certs/fullchain.pem:ro -v /etc/letsencrypt/live/nextui.woorifisa.store/privkey.pem:/etc/nginx/certs/privkey.pem:ro woori-node-app

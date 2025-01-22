@@ -1,0 +1,12 @@
+# 모든 텍스트 파일을 LF로 고정 (권장)
+* text=auto
+
+# 특정 파일 형식은 LF 강제 적용
+*.js   text eol=lf
+*.css  text eol=lf
+*.html text eol=lf
+
+# 바이너리 파일은 줄바꿈 변환 방지
+*.png  binary
+*.jpg  binary
+*.pdf  binary
