@@ -5,7 +5,10 @@ import { redirect } from 'next/navigation';
 
 const signupSchema = z
   .object({
-    email: z.string().email({ message: '이메일 형식이 올바르지 않습니다.' }).trim(),
+    email: z
+      .string()
+      .email({ message: '이메일 형식이 올바르지 않습니다.' })
+      .trim(),
     name: z.string().min(1, { message: '이름은 필수입니다' }).trim(),
     password: z
       .string()
@@ -62,7 +65,7 @@ export async function login(formData: FormData): Promise<{
   const parsedData = Object.fromEntries(formData) as Record<string, string>;
   const { email, password } = parsedData;
 
-  // 2. 사용자 확인 (테스트 저장소 사용)
+  // 3. 사용자 확인 (테스트 저장소 사용)
   const user = users.find(
     (user) => user.email === email && user.password === password
   );
@@ -74,6 +77,6 @@ export async function login(formData: FormData): Promise<{
     };
   }
 
-  // 3. 성공 시 리다이렉트
+  // 4. 성공 시 리다이렉트
   redirect('/lobby');
 }
