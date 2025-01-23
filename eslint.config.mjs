@@ -19,7 +19,7 @@ const compat = new FlatCompat({
     sourceType: 'module', // ES 모듈을 지원
     project: './tsconfig.json', // TypeScript 프로젝트 설정 파일 경로
   },
-  files: ['./src**/*.{ts,tsx}'], // `app` 폴더 내 TypeScript 및 TSX 파일
+  files: ['./src/**/*.{ts,tsx}', './*.mjs'], // `app` 폴더 내 TypeScript 및 TSX 파일
   rules: {
     '@typescript-eslint/no-floating-promises': 'error', // 처리되지 않은 Promise를 금지
     '@typescript-eslint/no-misused-promises': 'error', // 잘못된 Promise 사용(예: 조건문에서 Promise 사용)을 방지
@@ -69,6 +69,7 @@ const eslintConfig = [
           singleQuote: true, // 작은 따옴표 사용
           semi: true, // 세미콜론 추가
           trailingComma: 'all', // 가능한 모든 곳에 쉼표 추가
+          EndOfLineState: 'auto',
         },
       ],
     },
