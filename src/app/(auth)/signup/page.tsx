@@ -1,7 +1,12 @@
-export default function Home(): React.ReactElement {
+import { Suspense } from 'react';
+import SignupForm from 'components/SignupForm';
+
+export default function LoginPage() {
   return (
-    <div>
-      <h1>signup page</h1>
-    </div>
+    <main>
+      <Suspense>
+        <SignupForm />
+      </Suspense>
+    </main>
   );
 }
