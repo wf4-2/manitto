@@ -1,12 +1,29 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useState } from "react";
+import { login } from '../app/(auth)/actions';
 
 export default function LoginForm() {
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string[]>>({});
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setErrors({}); // 기존 에러 초기화
+
+    const formData = new FormData(e.currentTarget);
+
+    const result = await login(formData);
+    if (result?.errors) {
+      setErrors(result.errors); // 서버에서 반환된 에러 설정
+    }
+  };
 
   return (
-    <div className="w-[600px] h-[800px] flex-shrink-0 rounded-[12px] border-[0.5px] border-[#878787] bg-white p-10 flex flex-col justify-between">
+    <form
+      onSubmit={handleSubmit}
+      className="w-[600px] h-[800px] flex-shrink-0 rounded-[12px] border-[0.5px] border-[#878787] bg-white p-10 flex flex-col justify-between"
+    >
       <div className="space-y-10">
         <div className="space-y-3">
           <h1 className="text-3xl font-semibold">Login</h1>
@@ -25,10 +42,14 @@ export default function LoginForm() {
             </label>
             <input
               id="email"
+              name="email"
               type="email"
-              placeholder="Enter your email"
+              placeholder="이메일을 입력해주세요."
               className="w-full h-14 px-4 py-2 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2D76CE]"
             />
+            <p className="h-4 text-red-500 text-sm">
+              {errors.email?.[0] || ""}
+            </p>
           </div>
 
           <div className="space-y-3">
@@ -38,8 +59,9 @@ export default function LoginForm() {
             <div className="relative">
               <input
                 id="password"
+                name="password"
                 type={showPassword ? "text" : "password"}
-                placeholder="Enter your password"
+                placeholder="비밀번호를 입력해주세요."
                 className="w-full h-14 px-4 py-2 pr-12 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2D76CE]"
               />
               <button
@@ -76,7 +98,11 @@ export default function LoginForm() {
                       strokeLinejoin="round"
                       d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
                     />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
                   </svg>
                 )}
               </button>
@@ -87,8 +113,7 @@ export default function LoginForm() {
         <button className="w-full h-14 bg-[#ff3366] hover:bg-pink-300/90 text-white text-lg font-medium rounded-md transition-colors">
           LOGIN
         </button>
-      </div>     
-    </div>
-  )
+      </div>
+    </form>
+  );
 }
-

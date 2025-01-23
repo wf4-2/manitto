@@ -3,29 +3,22 @@
 import { z } from 'zod';
 import { redirect } from 'next/navigation';
 
-// 유효성 검증 스키마
 const signupSchema = z
   .object({
-    email: z.string().email({ message: 'Invalid email address' }).trim(),
-    name: z.string().min(1, { message: 'Name is required' }).trim(),
+    email: z.string().email({ message: '이메일 형식이 올바르지 않습니다.' }).trim(),
+    name: z.string().min(1, { message: '이름은 필수입니다' }).trim(),
     password: z
       .string()
-      .min(8, { message: 'Password must be at least 8 characters' })
+      .min(8, { message: '비밀번호는 최소 8자 입니다.' })
       .trim(),
     confirmPassword: z.string().trim(),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: 'Passwords do not match',
+    message: '비밀번호가 일치하지 않습니다.',
     path: ['confirmPassword'],
   });
 
-// 테스트용 사용자 저장소 (실제로는 데이터베이스 연동 필요)
-interface User {
-  email: string;
-  name: string;
-  password: string;
-}
-const users: User[] = [];
+const users: { email: string; name: string; password: string }[] = [];
 
 // 회원가입 함수
 export async function signup(formData: FormData): Promise<{
@@ -57,6 +50,30 @@ export async function signup(formData: FormData): Promise<{
   users.push({ email, name, password });
   console.log('User registered:', { email, name });
 
-  // 5. 성공 시 대시보드로 리다이렉트
+  // 5. 성공 시 리다이렉트
+  redirect('/login');
+}
+
+// 로그인 함수
+export async function login(formData: FormData): Promise<{
+  errors: Record<string, string[]>;
+} | void> {
+  // 1. 데이터 추출
+  const parsedData = Object.fromEntries(formData) as Record<string, string>;
+  const { email, password } = parsedData;
+
+  // 2. 사용자 확인 (테스트 저장소 사용)
+  const user = users.find(
+    (user) => user.email === email && user.password === password
+  );
+  if (!user) {
+    return {
+      errors: {
+        email: ['Invalid email or password'],
+      },
+    };
+  }
+
+  // 3. 성공 시 리다이렉트
   redirect('/lobby');
 }
