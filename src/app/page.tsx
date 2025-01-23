@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Link from "next/link"
 
 export default function Page() {
   return (
@@ -27,7 +28,9 @@ export default function Page() {
             rotate: { duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" },
           }}
         >
-          💌
+          <Link href="/login">
+            💌
+          </Link>
         </motion.div>
 
         {/* 서브타이틀 */}
