@@ -21,8 +21,11 @@ export default function Page() {
         <motion.div
           className="text-8xl md:text-[12rem] mt-8"
           initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.5 }}
+          animate={{ scale: 1, rotate : [0,10,0,-10,0] }}
+          transition={{
+            scale: { duration: 0.5 },
+            rotate: { duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" },
+          }}
         >
           💌
         </motion.div>
@@ -34,7 +37,7 @@ export default function Page() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.8 }}
         >
-          함께 나누는 따뜻한 마음, 우리또에서 시작해보세요.
+          함께 나누는 따뜻한 마음, 우리또에서 시작해보세요
         </motion.p>
       </div>
     </div>
