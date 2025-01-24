@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import Header from "@/components/Header";
-import LobbyCard from "@/components/LobbyCard";
-import ManittoListCard from "@/components/ManittoListCard";
-import GradientBackground from "@/components/GradientBackground";
-import CreateForm from "@/components/CreateForm"; // 방 만들기 컴포넌트 import
-import Modal from "@/components/Modal"; // 모달 컴포넌트 import
-import { useState } from "react";
+import Header from '@/components/Header';
+import LobbyCard from '@/components/LobbyCard';
+import ManittoListCard from '@/components/ManittoListCard';
+import GradientBackground from '@/components/GradientBackground';
+import CreateForm from '@/components/CreateForm'; // 방 만들기 컴포넌트 import
+import Modal from '@/components/Modal'; // 모달 컴포넌트 import
+import { useState } from 'react';
 
 export default function Home() {
   const [manitto, setManitto] = useState(null); // 진행 중인 마니또 상태

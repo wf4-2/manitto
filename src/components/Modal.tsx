@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
+import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 interface ModalProps {
   children: React.ReactNode & { props?: { onClose?: () => void } };
@@ -9,8 +9,8 @@ const Modal = ({ children }: ModalProps) => {
   const [portalNode, setPortalNode] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
-    const modalRoot = document.createElement("div");
-    modalRoot.id = "modal-root";
+    const modalRoot = document.createElement('div');
+    modalRoot.id = 'modal-root';
     document.body.appendChild(modalRoot);
 
     setPortalNode(modalRoot);
@@ -20,16 +20,18 @@ const Modal = ({ children }: ModalProps) => {
     };
   }, []);
 
-  if (!portalNode) return null;
+  if (!portalNode) {
+    return null;
+  }
 
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div
         className="fixed inset-0 bg-black bg-opacity-50"
         onClick={() => {
-          if (children && typeof children === "object" && "props" in children) {
+          if (children && typeof children === 'object' && 'props' in children) {
             const onClose = children.props?.onClose;
-            if (onClose && typeof onClose === "function") {
+            if (onClose && typeof onClose === 'function') {
               onClose();
             }
           }
