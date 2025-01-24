@@ -4,10 +4,16 @@ import Header from "@/components/Header";
 import LobbyCard from "@/components/LobbyCard";
 import ManittoListCard from "@/components/ManittoListCard";
 import GradientBackground from "@/components/GradientBackground";
+import CreateForm from "@/components/CreateForm"; // 방 만들기 컴포넌트 import
+import Modal from "@/components/Modal"; // 모달 컴포넌트 import
 import { useState } from "react";
 
 export default function Home() {
   const [manitto, setManitto] = useState(null); // 진행 중인 마니또 상태
+  const [isCreateRoomOpen, setIsCreateRoomOpen] = useState(false); // 방 만들기 모달 상태
+
+  const openCreateRoomModal = () => setIsCreateRoomOpen(true);
+  const closeCreateRoomModal = () => setIsCreateRoomOpen(false);
 
   return (
     <GradientBackground>
@@ -17,7 +23,7 @@ export default function Home() {
         {/* 로고 및 소개 */}
         <div className="mt-10 text-center">
           <h1 className="text-5xl font-bold text-red-500">우리또</h1>
-          <span className="text-6xl mt-2 block">💌</span> {/* 중앙 정렬 및 여백 추가 */}
+          <span className="text-6xl mt-2 block">💌</span>
           <p className="text-gray-700 mt-4">
             함께 나누는 따뜻한 마음, 우리또에서 시작해보세요
           </p>
@@ -25,7 +31,11 @@ export default function Home() {
 
         {/* 방 만들기 & 방 입장하기 */}
         <div className="flex gap-4 mt-8">
-          <LobbyCard title="방 만들기" description="새로운 마니또 시작하기" />
+          <LobbyCard
+            title="방 만들기"
+            description="새로운 마니또 시작하기"
+            onClick={openCreateRoomModal} // 클릭 시 모달 열기
+          />
           <LobbyCard title="방 입장하기" description="입장 코드 입력하기" />
         </div>
 
@@ -39,6 +49,13 @@ export default function Home() {
           )}
         </div>
       </div>
+
+      {/* 방 만들기 모달 */}
+      {isCreateRoomOpen && (
+        <Modal>
+          <CreateForm onClose={closeCreateRoomModal} />
+        </Modal>
+      )}
     </GradientBackground>
   );
 }
