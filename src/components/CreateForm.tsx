@@ -2,10 +2,21 @@ import { useState } from 'react';
 
 const CreateForm = ({ onClose }: { onClose: () => void }) => {
   const [roomCode, setRoomCode] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
 
   const handleCreateRoom = () => {
+    // 랜덤 참가 코드 생성 (6자리 영문 및 숫자 조합)
     const code = Math.random().toString(36).substring(2, 8).toUpperCase();
     setRoomCode(code);
+    setCopied(false); // 새 코드 생성 시 복사 상태 초기화
+  };
+
+  const handleCopyCode = async () => {
+    if (roomCode) {
+      await navigator.clipboard.writeText(roomCode); // 클립보드에 복사
+      setCopied(true); // 복사 성공 상태 업데이트
+      setTimeout(() => setCopied(false), 2000); // 2초 후 상태 초기화
+    }
   };
 
   return (
@@ -60,9 +71,18 @@ const CreateForm = ({ onClose }: { onClose: () => void }) => {
         {roomCode && (
           <div className="mt-6 text-center">
             <p className="text-lg text-gray-800 font-bold">참가 코드</p>
-            <p className="text-2xl font-semibold text-blue-500 mt-2">
+            <p
+              className="text-2xl font-semibold text-blue-500 mt-2 cursor-pointer select-none hover:underline"
+              onClick={handleCopyCode} // 클릭 시 복사
+              title="클릭하면 복사됩니다"
+            >
               {roomCode}
             </p>
+            {copied && (
+              <p className="text-sm text-green-500 mt-2">
+                참가 코드가 복사되었습니다!
+              </p>
+            )}
           </div>
         )}
 
