@@ -3,7 +3,6 @@
 import Header from '@/components/Header';
 import LobbyCard from '@/components/LobbyCard';
 import ManittoListCard from '@/components/ManittoListCard';
-import GradientBackground from '@/components/GradientBackground';
 import CreateForm from '@/components/CreateForm';
 import EnterForm from '@/components/EnterForm';
 import Modal from '@/components/Modal';
@@ -21,7 +20,7 @@ export default function Home() {
   const closeEnterRoomModal = () => setIsEnterRoomOpen(false);
 
   return (
-    <GradientBackground>
+    <>
       <div className="flex flex-col items-center min-h-screen px-6">
         <Header />
 
@@ -72,6 +71,6 @@ export default function Home() {
           <EnterForm onClose={closeEnterRoomModal} />
         </Modal>
       )}
-    </GradientBackground>
+    </>
   );
 }
