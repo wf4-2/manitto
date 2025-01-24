@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import FormLayout from './FormLayout';
 
 const CreateForm = ({ onClose }: { onClose: () => void }) => {
   const [roomCode, setRoomCode] = useState<string | null>(null);
@@ -20,7 +21,7 @@ const CreateForm = ({ onClose }: { onClose: () => void }) => {
   };
 
   return (
-    <div className="w-[505px] h-[700px] flex-shrink-0 rounded-[10px] border-[0.5px] border-[#878787] bg-white p-8 flex flex-col justify-between">
+    <FormLayout>
       <div>
         <div className="space-y-2 mb-8">
           <h1 className="text-2xl font-semibold">방 만들기</h1>
@@ -96,7 +97,7 @@ const CreateForm = ({ onClose }: { onClose: () => void }) => {
           </button>
         )}
       </div>
-    </div>
+    </FormLayout>
   );
 };
 
