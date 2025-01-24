@@ -21,7 +21,13 @@ const signupSchema = z
     path: ['confirmPassword'],
   });
 
-const users: { email: string; name: string; password: string }[] = [];
+const users: { email: string; name: string; password: string }[] = [
+  {
+    email: 'test@test.com',
+    name: 'Test User',
+    password: '12345678',
+  },
+];
 
 // 회원가입 함수
 export async function signup(formData: FormData): Promise<{
@@ -51,7 +57,6 @@ export async function signup(formData: FormData): Promise<{
 
   // 4. 사용자 데이터 저장
   users.push({ email, name, password });
-  console.log('User registered:', { email, name });
 
   // 5. 성공 시 리다이렉트
   redirect('/login');

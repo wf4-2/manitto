@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 import { login } from '../app/(auth)/actions';
 
 export default function LoginForm() {
@@ -22,22 +22,22 @@ export default function LoginForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-[600px] h-[800px] flex-shrink-0 rounded-[12px] border-[0.5px] border-[#878787] bg-white p-10 flex flex-col justify-between"
+      className="w-[505px] h-[700px] flex-shrink-0 rounded-[10px] border-[0.5px] border-[#878787] bg-white p-8 flex flex-col justify-between"
     >
-      <div className="space-y-10">
-        <div className="space-y-3">
-          <h1 className="text-3xl font-semibold">Login</h1>
-          <p className="text-lg">
-            계정이 없으신가요?{" "}
+      <div>
+        <div className="space-y-2 mb-8">
+          <h1 className="text-2xl font-semibold">Login</h1>
+          <p className="text-base">
+            계정이 없으신가요?{' '}
             <a href="/signup" className="text-[#2D76CE] hover:underline">
               가입하기
             </a>
           </p>
         </div>
 
-        <div className="space-y-8">
-          <div className="space-y-3">
-            <label htmlFor="email" className="text-lg font-medium">
+        <div className="space-y-6 mb-16">
+          <div className="space-y-2">
+            <label htmlFor="email" className="text-base font-medium">
               Email
             </label>
             <input
@@ -45,29 +45,29 @@ export default function LoginForm() {
               name="email"
               type="email"
               placeholder="이메일을 입력해주세요."
-              className="w-full h-14 px-4 py-2 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2D76CE]"
+              className="w-full h-12 px-3 py-2 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2D76CE]"
             />
             <p className="h-4 text-red-500 text-sm">
-              {errors.email?.[0] || ""}
+              {errors.email?.[0] || ''}
             </p>
           </div>
 
-          <div className="space-y-3">
-            <label htmlFor="password" className="text-lg font-medium">
+          <div className="space-y-2">
+            <label htmlFor="password" className="text-base font-medium">
               Password
             </label>
             <div className="relative">
               <input
                 id="password"
                 name="password"
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 placeholder="비밀번호를 입력해주세요."
-                className="w-full h-14 px-4 py-2 pr-12 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2D76CE]"
+                className="w-full h-12 px-3 py-2 pr-10 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2D76CE]"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
               >
                 {showPassword ? (
                   <svg
@@ -76,7 +76,7 @@ export default function LoginForm() {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-6 h-6"
+                    className="w-5 h-5"
                   >
                     <path
                       strokeLinecap="round"
@@ -91,7 +91,7 @@ export default function LoginForm() {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-6 h-6"
+                    className="w-5 h-5"
                   >
                     <path
                       strokeLinecap="round"
@@ -110,7 +110,7 @@ export default function LoginForm() {
           </div>
         </div>
 
-        <button className="w-full h-14 bg-[#ff3366] hover:bg-pink-300/90 text-white text-lg font-medium rounded-md transition-colors">
+        <button className="w-full h-12 bg-[#ff3366] hover:bg-pink-300/90 text-white text-base font-medium rounded-md transition-colors">
           LOGIN
         </button>
       </div>
