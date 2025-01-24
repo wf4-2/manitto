@@ -27,7 +27,7 @@ const Modal = ({ children }: ModalProps) => {
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div
-        className="fixed inset-0 bg-black bg-opacity-50"
+        className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm"
         onClick={() => {
           if (children && typeof children === 'object' && 'props' in children) {
             const onClose = children.props?.onClose;

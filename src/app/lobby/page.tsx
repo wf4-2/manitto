@@ -4,16 +4,21 @@ import Header from '@/components/Header';
 import LobbyCard from '@/components/LobbyCard';
 import ManittoListCard from '@/components/ManittoListCard';
 import GradientBackground from '@/components/GradientBackground';
-import CreateForm from '@/components/CreateForm'; // 방 만들기 컴포넌트 import
-import Modal from '@/components/Modal'; // 모달 컴포넌트 import
+import CreateForm from '@/components/CreateForm';
+import EnterForm from '@/components/EnterForm';
+import Modal from '@/components/Modal';
 import { useState } from 'react';
 
 export default function Home() {
   const [manitto, setManitto] = useState(null); // 진행 중인 마니또 상태
   const [isCreateRoomOpen, setIsCreateRoomOpen] = useState(false); // 방 만들기 모달 상태
+  const [isEnterRoomOpen, setIsEnterRoomOpen] = useState(false); // 방 입장하기 모
 
   const openCreateRoomModal = () => setIsCreateRoomOpen(true);
   const closeCreateRoomModal = () => setIsCreateRoomOpen(false);
+
+  const openEnterRoomModal = () => setIsEnterRoomOpen(true);
+  const closeEnterRoomModal = () => setIsEnterRoomOpen(false);
 
   return (
     <GradientBackground>
@@ -36,7 +41,11 @@ export default function Home() {
             description="새로운 마니또 시작하기"
             onClick={openCreateRoomModal} // 클릭 시 모달 열기
           />
-          <LobbyCard title="방 입장하기" description="입장 코드 입력하기" />
+          <LobbyCard
+            title="방 입장하기"
+            description="입장 코드 입력하기"
+            onClick={openEnterRoomModal}
+          />
         </div>
 
         {/* 진행 중인 마니또 정보 */}
@@ -54,6 +63,13 @@ export default function Home() {
       {isCreateRoomOpen && (
         <Modal>
           <CreateForm onClose={closeCreateRoomModal} />
+        </Modal>
+      )}
+
+      {/* 방 입장하기 모달 */}
+      {isEnterRoomOpen && (
+        <Modal>
+          <EnterForm onClose={closeEnterRoomModal} />
         </Modal>
       )}
     </GradientBackground>
