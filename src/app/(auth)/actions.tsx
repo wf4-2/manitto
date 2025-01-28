@@ -72,7 +72,7 @@ export async function login(formData: FormData): Promise<{
 
   // 3. 사용자 확인 (테스트 저장소 사용)
   const user = users.find(
-    (user) => user.email === email && user.password === password
+    (user) => user.email === email && user.password === password,
   );
   if (!user) {
     return {

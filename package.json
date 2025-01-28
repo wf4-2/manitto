@@ -16,7 +16,7 @@
   },
   "engines": {
     "node": ">=18",
-    "pnpm": ">=9.15.4"
+    "pnpm": ">=9.15.0"
   },
   "dependencies": {
     "@heroui/react": "^2.6.14",

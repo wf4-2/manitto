@@ -39,7 +39,7 @@ const Modal = ({ children }: ModalProps) => {
       />
       <div className="relative z-1">{children}</div>
     </div>,
-    portalNode
+    portalNode,
   );
 };
 
